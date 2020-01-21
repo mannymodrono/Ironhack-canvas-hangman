@@ -14,18 +14,23 @@ class Hangman {
   }
 
   checkIfLetter(keyCode) {
-    document.addEventListener('keydown', function(event) {
-      if(event.keyCode >= 65 && event.keyCode <= 90) {
-          return true;
-      }
-      else{
-          return false;
-      }
-  });
+    if(keyCode >= 65 && keyCode <= 90) {
+      this.letters.push(String.fromCharCode(keyCode));
+      this.guessedLetter = String.fromCharCode(keyCode);
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 
   checkClickedLetters(key) {
-
+    if (this.letters.includes(key)) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   addCorrectLetter(i) {
