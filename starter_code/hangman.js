@@ -14,8 +14,10 @@ class Hangman {
   }
 
   checkIfLetter(keyCode) {
-    if(keyCode >= 65 && keyCode <= 90) {
+    if(keyCode >= 65 && keyCode <= 90 && this.letters.includes(String.fromCharCode(keyCode)) === false) {
+      console.log(String.fromCharCode(keyCode))
       this.letters.push(String.fromCharCode(keyCode));
+      this.checkClickedLetters(String.fromCharCode(keyCode).toLocaleLowerCase())
       return true;
     }
     else{
@@ -24,16 +26,19 @@ class Hangman {
   }
 
   checkClickedLetters(key) {
-    if (this.letters.includes(key)) {
-      return false;
+    if (this.secretWord.includes(key)) {
+      console.log('yes')
+      this.addCorrectLetter(key);
     }
+
     else {
-      return true;
+      console.log('no')
+      this.addWrongLetter(key);
     }
   }
 
-  addCorrectLetter(i) {
-    this.guessedLetter = this.secretWord.split('')[i].toUpperCase();
+  addCorrectLetter(key) {
+    canvas.writeCorrectLetter(key);
   }
 
   addWrongLetter(letter) {
@@ -75,5 +80,5 @@ document.getElementById('start-game-button').onclick = () => {
 };
 
 document.onkeydown = (e) => {
-
+  hangman.checkIfLetter(e.keyCode);
 };
