@@ -42,11 +42,14 @@ class Hangman {
   }
 
   addWrongLetter(letter) {
-    this.errorsLeft -= 1;
+    canvas.writeWrongLetter(letter);
+    this.errorsLeft --;
+    this.checkGameOver();
   }
 
   checkGameOver() {
     if (this.errorsLeft <= 0) {
+      console.log('you lost')
       return true;
     }
     else {

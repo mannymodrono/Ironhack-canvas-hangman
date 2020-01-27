@@ -5,6 +5,7 @@ class HangmanCanvas {
     this.secretWord = secretWord;
     this.letters = this.secretWord.split('');
     this.errorsLeft = 0;
+    this.errors = [this.stand, this.pole, this.arm, this.rope, this.head, this.body, this.leg1, this.leg2, this.arm1, this.arm2];
   }
 
   createBoard() {
@@ -12,6 +13,7 @@ class HangmanCanvas {
     this.context.lineWidth= 3;
     this.context.font='30px arial';
     this.drawLines();
+    
   }
 
   drawLines() {
@@ -22,7 +24,36 @@ class HangmanCanvas {
       this.context.stroke();
       this.context.closePath();
     }
+  }
 
+  writeCorrectLetter(letter) {
+    for (let index=0;index<this.letters.length;index++) {
+      if (this.letters[index] == letter) {
+        console.log(index);
+        this.context.fillText(letter, 800+index*50, 540);
+      }
+    }
+  }
+
+  writeWrongLetter(letter) {
+    // this.errors[this.errorsLeft]();
+    this.errorsLeft++;
+
+  }
+
+  drawHangman(shape) {
+
+  }
+
+  gameOver() {
+
+  }
+
+  winner() {
+
+  }
+
+  stand() {
     this.context.beginPath();
     this.context.moveTo(100, 550);
     this.context.lineTo(250, 550);
@@ -41,30 +72,67 @@ class HangmanCanvas {
     this.context.stroke();
     this.context.closePath();
   }
-
-  writeCorrectLetter(letter) {
-    for (let index=0;index<this.letters.length;index++) {
-      if (this.letters[index] == letter) {
-        console.log(index);
-        this.context.fillText(letter, 800+index*50, 540);
-      }
-    }
+  pole() {
+    this.context.beginPath();
+    this.context.moveTo(175, 500);
+    this.context.lineTo(175, 300);
+    this.context.stroke();
+    this.context.closePath();
   }
-
-  writeWrongLetter(letter, errorsLeft) {
-
+  arm() {
+    this.context.beginPath();
+    this.context.moveTo(175, 300);
+    this.context.lineTo(300, 300);
+    this.context.stroke();
+    this.context.closePath();
   }
-
-  drawHangman(shape) {
-
+  rope() {
+    this.context.beginPath();
+    this.context.moveTo(300, 300);
+    this.context.lineTo(300, 330);
+    this.context.stroke();
+    this.context.closePath();
   }
-
-  gameOver() {
-
+  head() {
+    this.context.beginPath();
+    this.context.arc(300, 360, 30, 0, Math.PI * 2);
+    this.context.stroke();
+    this.context.closePath();
   }
-
-  winner() {
-
+  body() {
+    this.context.beginPath();
+    this.context.moveTo(300, 390);
+    this.context.lineTo(300, 470);
+    this.context.stroke();
+    this.context.closePath();
+  }
+  leg1() {
+    this.context.beginPath();
+    this.context.moveTo(300, 470);
+    this.context.lineTo(330, 520);
+    this.context.stroke();
+    this.context.closePath();
+  }
+  leg2() {
+    this.context.beginPath();
+    this.context.moveTo(300, 470);
+    this.context.lineTo(270, 520);
+    this.context.stroke();
+    this.context.closePath();
+  }
+  arm1() {
+    this.context.beginPath();
+    this.context.moveTo(300, 420);
+    this.context.lineTo(330, 460);
+    this.context.stroke();
+    this.context.closePath();
+  }
+  arm2() {
+    this.context.beginPath();
+    this.context.moveTo(300, 420);
+    this.context.lineTo(270, 460);
+    this.context.stroke();
+    this.context.closePath();
   }
 
 }
