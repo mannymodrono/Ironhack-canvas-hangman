@@ -5,15 +5,14 @@ class HangmanCanvas {
     this.secretWord = secretWord;
     this.letters = this.secretWord.split('');
     this.errorsLeft = 0;
-    this.errors = [this.stand, this.pole, this.arm, this.rope, this.head, this.body, this.leg1, this.leg2, this.arm1, this.arm2];
+    this.errors = 10;
   }
 
   createBoard() {
-    this.context.clearRect(0, 0, canvas.width, canvas.height);
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.lineWidth= 3;
     this.context.font='30px arial';
     this.drawLines();
-    
   }
 
   drawLines() {
@@ -24,6 +23,9 @@ class HangmanCanvas {
       this.context.stroke();
       this.context.closePath();
     }
+
+    this.context.fillText('Incorrect letters:', 400, 100)
+    this.context.fillText('Errors left: ' + this.errors, 400, 60);
   }
 
   writeCorrectLetter(letter) {
@@ -37,8 +39,44 @@ class HangmanCanvas {
 
   writeWrongLetter(letter) {
     // this.errors[this.errorsLeft]();
+    switch (this.errorsLeft) {
+      case 0:
+        this.stand();
+        break;
+      case 1:
+        this.pole();
+        break;
+      case 2:
+        this.arm();
+        break;
+      case 3:
+        this.rope();
+        break;
+      case 4:
+        this.head();
+        break;
+      case 5:
+        this.body();
+        break;
+      case 6:
+        this.leg1();
+        break;
+      case 7:
+        this.leg2();
+        break;
+      case 8:
+        this.arm1();
+        break;
+      case 9:
+        this.arm2();
+        break;
+    }
     this.errorsLeft++;
+    this.errors--;
 
+    this.context.fillText(letter + ',', 615+this.errorsLeft*25, 100);
+    this.context.clearRect(400, 37, 1000, 30)
+    this.context.fillText('Errors left: ' + this.errors, 400, 60);
   }
 
   drawHangman(shape) {

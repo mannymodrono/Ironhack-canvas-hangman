@@ -2,7 +2,7 @@ let hangman;
 
 class Hangman {
   constructor() {
-    this.words = ['hang', 'secret', 'winner'];
+    this.words = ['hang', 'secret', 'winner', 'constructor', 'visual'];
     this.secretWord = this.getWord();
     this.letters = [];
     this.guessedLetter;
@@ -39,6 +39,7 @@ class Hangman {
 
   addCorrectLetter(key) {
     canvas.writeCorrectLetter(key);
+    this.checkWinner();
   }
 
   addWrongLetter(letter) {
@@ -49,7 +50,10 @@ class Hangman {
 
   checkGameOver() {
     if (this.errorsLeft <= 0) {
-      console.log('you lost')
+      alert('you lost');
+      hangman = new Hangman();
+      canvas = new HangmanCanvas(hangman.secretWord);
+      canvas.createBoard();
       return true;
     }
     else {
@@ -77,9 +81,9 @@ class Hangman {
 }
 
 document.getElementById('start-game-button').onclick = () => {
-  hangman = new Hangman();
-  canvas = new HangmanCanvas(hangman.secretWord);
-  canvas.createBoard();
+    hangman = new Hangman();
+    canvas = new HangmanCanvas(hangman.secretWord);
+    canvas.createBoard();
 };
 
 document.onkeydown = (e) => {
