@@ -7,6 +7,7 @@ class Hangman {
     this.letters = [];
     this.guessedLetter;
     this.errorsLeft = 10;
+    this.correctLetters = [];
   }
 
   getWord() {
@@ -63,20 +64,22 @@ class Hangman {
 
   checkWinner() {
     let length = 0;
-    let correctLetters = this.letters.filter((i) => this.secretWord.includes(i));
-    this.letters.forEach((i) => {
-    if (this.secretWord.includes(i)) {
-      length ++;
-    }
-  });
+    let splitWord = this.secretWord.split('');
+    splitWord.forEach((i) => {
+      if(this.correctLetters.includes(i)) {
+        length++
+        console.log(length)
+      }
+    })
 
-    if (length === correctLetters.length) {
-      return true;
-    }
-    else {
-      return false;
+    if (length === splitWord.length) {
+      alert('Winner');
+      hangman = new Hangman();
+      canvas = new HangmanCanvas(hangman.secretWord);
+      canvas.createBoard();
     }
   }
+
 
 }
 

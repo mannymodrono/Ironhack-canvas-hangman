@@ -33,6 +33,7 @@ class HangmanCanvas {
       if (this.letters[index] == letter) {
         console.log(index);
         this.context.fillText(letter, 800+index*50, 540);
+        hangman.correctLetters.push(letter)
       }
     }
   }
